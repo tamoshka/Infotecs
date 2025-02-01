@@ -1,7 +1,5 @@
-﻿#include <iostream>
-#include <thread>
-#include <mutex>
-#include "LibraryInfotecs.h"
+﻿#include "FirstProgram.h"
+#include "../LibraryInfotecs/LibraryInfotecs.h"
 
 using namespace std;
 
@@ -45,11 +43,13 @@ void FunctionForSecondThread()
 		cout << buffer;
 		cout << '\n';
 		cout << sum;
+		cout << '\n';
 	}
 	else
 	{
 		cout << '\n';
 		cout << "Exception";
+		cout << '\n';
 	}
 }
 

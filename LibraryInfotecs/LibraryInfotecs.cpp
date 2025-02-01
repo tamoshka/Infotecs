@@ -1,4 +1,4 @@
-#include "pch.h"
+#include <string>
 #include <utility>
 #include "LibraryInfotecs.h"
 

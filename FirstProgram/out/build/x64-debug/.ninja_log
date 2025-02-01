@@ -1,0 +1,7 @@
+# ninja log v5
+8	577	7600877525924676	CMakeFiles/FirstProgram.dir/FirstProgram.cpp.obj	9597f15056c4d400
+14	156	7600879954890819	build.ninja	5ffe6789546a258a
+7	470	7600856405324205	CMakeFiles/LibraryInfotecs.dir/C_/Users/tamos/source/repos/InfotecsRepos/LibraryInfotecs/LibraryInfotecs.cpp.obj	8f99288fb2e3ec6d
+471	750	7600856407948798	LibraryInfotecs.dll	5d9107753f035f1a
+471	750	7600856407948798	LibraryInfotecs.lib	5d9107753f035f1a
+578	756	7600877527283717	FirstProgram.exe	44e235ee2f019d8f
