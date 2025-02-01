@@ -11,5 +11,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <pthread.h>
+#include <cstring>
+#include <arpa/inet.h>
+#include <thread>
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.

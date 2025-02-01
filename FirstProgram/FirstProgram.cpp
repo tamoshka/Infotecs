@@ -5,26 +5,61 @@ using namespace std;
 
 bool Checker(string);
 void FunctionForFirstThread(string);
-void FunctionForSecondThread();
+int FunctionForSecondThread();
 string buffer;
 pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mutex;
 
+#define PORT 8080
+#define SERVER_IP "127.0.0.1"
+
 int main()
 {
+	int sock;
+	struct sockaddr_in serv_addr;
 	string message;
 	while (true)
 	{
-		cout << "Print the message: ";
-		cin >> message;
-		pthread_t thread1, thread2;
-		pthread_mutex_init(&mutex, NULL);
-		pthread_create(&thread2, NULL, FunctionForSecondThread());
-		this_thread::sleep_for(chrono::milliseconds(5));
-		pthread_create(&thread1, NULL, FunctionForFirstThread(), message);
-		pthread_join(thread1, NULL);
-		pthread_join(thread2, NULL);
-		pthread_mutex_destroy(&mutex);
+		sock = socket(AF_INET, SOCK_STREAM, 0);
+		if (sock == -1) {
+			std::cerr << "Ошибка создания сокета\n";
+			return 1;
+		}
+
+		serv_addr.sin_family = AF_INET;
+		serv_addr.sin_port = htons(PORT);
+		if (inet_pton(AF_INET, SERVER_IP, &serv_addr.sin_addr) <= 0) {
+			std::cerr << "Неверный адрес сервера\n";
+			return 1;
+		}
+
+		while (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+			std::cerr << "Не удалось подключиться, повтор через 3 сек...\n";
+			std::this_thread::sleep_for(std::chrono::seconds(3));
+		}
+
+		std::cout << "Подключение установлено\n";
+		int number = 0;
+		while (true)
+		{
+			cout << "Print the message: ";
+			cin >> message;
+			pthread_t thread1, thread2;
+			pthread_mutex_init(&mutex, NULL);
+			int sum = pthread_create(&thread2, NULL, FunctionForSecondThread());
+			this_thread::sleep_for(chrono::milliseconds(5));
+			pthread_create(&thread1, NULL, FunctionForFirstThread(), message);
+			ssize_t bytes = send(sock, &sum, sizeof(sum), 0);
+			if (bytes <= 0) {
+				std::cerr << "Соединение потеряно, переподключение...\n";
+				close(sock);
+				break;
+			}
+			std::cout << "Отправлено число: " << sum << std::endl;
+			pthread_join(thread1, NULL);
+			pthread_join(thread2, NULL);
+			pthread_mutex_destroy(&mutex);
+		}
 	}
 	return 0;
 }
@@ -41,7 +76,7 @@ void FunctionForFirstThread(string message)
 	pthread_mutex_unlock(&mutex);
 }
 
-void FunctionForSecondThread()
+int FunctionForSecondThread()
 {
 	pthread_mutex_lock(&mutex);
 	while (!signal_sent)
@@ -51,22 +86,8 @@ void FunctionForSecondThread()
 	string message = buffer;
 	buffer.erase(0, buffer.size());
 	cout << message;
-	int sum = FunctionTwo(message);
-	if (FunctionThree(sum))
-	{
-		cout << '\n';
-		cout << buffer;
-		cout << '\n';
-		cout << sum;
-		cout << '\n';
-	}
-	else
-	{
-		cout << '\n';
-		cout << "Exception";
-		cout << '\n';
-	}
 	pthread_mutex_unlock(&mutex);
+	return FunctionTwo(message);
 }
 
 bool Checker(string message)
