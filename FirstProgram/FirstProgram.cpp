@@ -1,12 +1,14 @@
 ﻿#include "FirstProgram.h"
 
+
 using namespace std;
 
 bool Checker(string);
 void FunctionForFirstThread(string);
 void FunctionForSecondThread();
 string buffer;
-mutex mtx;
+pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
+pthread_mutex_t mutex;
 
 int main()
 {
@@ -15,28 +17,34 @@ int main()
 	{
 		cout << "Print the message: ";
 		cin >> message;
-		thread th1(FunctionForFirstThread, message);
+		pthread_t thread1, thread2;
+		pthread_mutex_init(&mutex, NULL);
+		pthread_create(&thread2, NULL, FunctionForSecondThread());
 		this_thread::sleep_for(chrono::milliseconds(5));
-		thread th2(FunctionForSecondThread);
-		th1.join();
-		th2.join();
+		pthread_create(&thread1, NULL, FunctionForFirstThread(), message);
+		pthread_join(thread1, NULL);
+		pthread_join(thread2, NULL);
+		pthread_mutex_destroy(&mutex);
 	}
+	return 0;
 }
 
 void FunctionForFirstThread(string message)
 {
-	mtx.lock();
+	pthread_mutex_lock(&mutex);
 	if (Checker(message))
 	{
 		FunctionOne(message);
 		buffer = message;
 	}
-	mtx.unlock();
+	pthread_cond_signal(&condvar);
+	pthread_mutex_unlock(&mutex);
 }
 
 void FunctionForSecondThread()
 {
-	mtx.lock();
+	pthread_mutex_lock(&mutex);
+	pthread_cond_wait(&condvar, &mutex);
 	string message = buffer;
 	buffer.erase(0, buffer.size());
 	cout << message;
@@ -55,7 +63,7 @@ void FunctionForSecondThread()
 		cout << "Exception";
 		cout << '\n';
 	}
-	mtx.unlock();
+	pthread_mutex_unlock(&mutex);
 }
 
 bool Checker(string message)

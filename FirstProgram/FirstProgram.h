@@ -4,10 +4,12 @@
 #pragma once
 
 #include <iostream>
-#include <thread>
-#include <mutex>
 #include <chrono>
 #include "../LibraryInfotecs/LibraryInfotecs.h"
 #include <sys/types.h>	
+#include <sys/socket.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <pthread.h>
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
