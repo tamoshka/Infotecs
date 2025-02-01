@@ -9,14 +9,29 @@ int main()
 {
 	string buffer;
 	string message;
-	cout << "Введите строку: ";
+	cout << "Print the message: ";
 	cin >> message;
 	if (Checker(message))
 	{
 		buffer = message;
 		FunctionOne(buffer);
-		cout << buffer;
 	}
+	cout << buffer;
+	int sum = FunctionTwo(buffer);
+	if (FunctionThree(sum))
+	{
+		cout << '\n';
+		cout << buffer;
+		cout << '\n';
+		cout << sum;
+	}
+	else
+	{
+		cout << '\n';
+		cout << "Exception";
+	}
+	buffer.erase(0, buffer.size());
+	cout << buffer;
 }
 
 bool Checker(string message)

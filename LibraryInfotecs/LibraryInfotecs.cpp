@@ -42,7 +42,7 @@ int FunctionTwo(string message)
 			message[i] == '8' || message[i] == '9')
 		{
 			char element = message[i];
-			sum += (int)element;
+			sum = sum + (int)element - 48;
 		}
 	}
 	return sum;
