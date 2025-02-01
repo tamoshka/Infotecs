@@ -1,4 +1,0 @@
-C:/Users/tamos/source/repos/InfotecsRepos/SecondProgram/out/build/x64-debug/CMakeFiles/LibraryInfotecs.dir
-C:/Users/tamos/source/repos/InfotecsRepos/SecondProgram/out/build/x64-debug/CMakeFiles/SecondProgram.dir
-C:/Users/tamos/source/repos/InfotecsRepos/SecondProgram/out/build/x64-debug/CMakeFiles/edit_cache.dir
-C:/Users/tamos/source/repos/InfotecsRepos/SecondProgram/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
