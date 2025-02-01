@@ -1,23 +1,44 @@
 ﻿#include <iostream>
+#include <thread>
+#include <mutex>
 #include "LibraryInfotecs.h"
 
 using namespace std;
 
 bool Checker(string);
+void FunctionForFirstThread(string);
+void FunctionForSecondThread();
+string buffer;
 
 int main()
 {
-	string buffer;
+	thread threadOne, threadTwo;
+	mutex mutex;
 	string message;
-	cout << "Print the message: ";
-	cin >> message;
+	while (true)
+	{
+		cout << "Print the message: ";
+		cin >> message;
+		FunctionForFirstThread(message);
+		FunctionForSecondThread();
+	}
+}
+
+void FunctionForFirstThread(string message)
+{
 	if (Checker(message))
 	{
+		FunctionOne(message);
 		buffer = message;
-		FunctionOne(buffer);
 	}
-	cout << buffer;
-	int sum = FunctionTwo(buffer);
+}
+
+void FunctionForSecondThread()
+{
+	string message = buffer;
+	buffer.erase(0, buffer.size());
+	cout << message;
+	int sum = FunctionTwo(message);
 	if (FunctionThree(sum))
 	{
 		cout << '\n';
@@ -30,8 +51,6 @@ int main()
 		cout << '\n';
 		cout << "Exception";
 	}
-	buffer.erase(0, buffer.size());
-	cout << buffer;
 }
 
 bool Checker(string message)
