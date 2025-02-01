@@ -44,7 +44,10 @@ void FunctionForFirstThread(string message)
 void FunctionForSecondThread()
 {
 	pthread_mutex_lock(&mutex);
-	pthread_cond_wait(&condvar, &mutex);
+	while (!signal_sent)
+	{
+		pthread_cond_wait(&condvar, &mutex);
+	}
 	string message = buffer;
 	buffer.erase(0, buffer.size());
 	cout << message;
