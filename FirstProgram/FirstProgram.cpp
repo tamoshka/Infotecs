@@ -1,5 +1,4 @@
 ﻿#include "FirstProgram.h"
-#include "../LibraryInfotecs/LibraryInfotecs.h"
 
 using namespace std;
 
@@ -7,32 +6,37 @@ bool Checker(string);
 void FunctionForFirstThread(string);
 void FunctionForSecondThread();
 string buffer;
+mutex mtx;
 
 int main()
 {
-	thread threadOne, threadTwo;
-	mutex mutex;
 	string message;
 	while (true)
 	{
 		cout << "Print the message: ";
 		cin >> message;
-		FunctionForFirstThread(message);
-		FunctionForSecondThread();
+		thread th1(FunctionForFirstThread, message);
+		this_thread::sleep_for(chrono::milliseconds(5));
+		thread th2(FunctionForSecondThread);
+		th1.join();
+		th2.join();
 	}
 }
 
 void FunctionForFirstThread(string message)
 {
+	mtx.lock();
 	if (Checker(message))
 	{
 		FunctionOne(message);
 		buffer = message;
 	}
+	mtx.unlock();
 }
 
 void FunctionForSecondThread()
 {
+	mtx.lock();
 	string message = buffer;
 	buffer.erase(0, buffer.size());
 	cout << message;
@@ -51,6 +55,7 @@ void FunctionForSecondThread()
 		cout << "Exception";
 		cout << '\n';
 	}
+	mtx.unlock();
 }
 
 bool Checker(string message)

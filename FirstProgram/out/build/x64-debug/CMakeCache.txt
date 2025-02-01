@@ -204,6 +204,9 @@ FirstProgram_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 FirstProgram_SOURCE_DIR:STATIC=C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram
 
+//Path to a library.
+PTHREAD_LIBRARY:FILEPATH=PTHREAD_LIBRARY-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries

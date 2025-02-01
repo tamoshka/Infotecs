@@ -1,0 +1,4 @@
+C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram/out/build/x86-release/CMakeFiles/LibraryInfotecs.dir
+C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram/out/build/x86-release/CMakeFiles/FirstProgram.dir
+C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram/out/build/x86-release/CMakeFiles/edit_cache.dir
+C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram/out/build/x86-release/CMakeFiles/rebuild_cache.dir

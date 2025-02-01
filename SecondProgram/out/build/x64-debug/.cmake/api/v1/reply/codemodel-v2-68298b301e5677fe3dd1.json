@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SecondProgram",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "LibraryInfotecs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-LibraryInfotecs-Debug-c53d4bb384824dc0fa4f.json",
+					"name" : "LibraryInfotecs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SecondProgram::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SecondProgram-Debug-d767127f3901638156ce.json",
+					"name" : "SecondProgram",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/tamos/source/repos/InfotecsRepos/SecondProgram/out/build/x64-debug",
+		"source" : "C:/Users/tamos/source/repos/InfotecsRepos/SecondProgram"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

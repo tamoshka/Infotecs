@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "FirstProgram",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "FirstProgram::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-FirstProgram-Debug-a78a75c0c50d9bed8e7e.json",
+					"name" : "FirstProgram",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "LibraryInfotecs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-LibraryInfotecs-Debug-6e8c4c6baedba9354db0.json",
+					"name" : "LibraryInfotecs",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram/out/build/x86-debug",
+		"source" : "C:/Users/tamos/source/repos/InfotecsRepos/FirstProgram"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
