@@ -1,4 +1,4 @@
-﻿# CMakeList.txt: проект CMake для FirstProgram; включите исходный код и определения,
+﻿# CMakeList.txt: проект CMake для SecondProgram; включите исходный код и определения,
 # укажите здесь логику для конкретного проекта.
 #
 cmake_minimum_required (VERSION 3.8)
@@ -9,20 +9,16 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-set( CMAKE_CXX_COMPILER "usr/bin/g++" )
-set( CMAKE_C_COMPILER "usr/bin/gcc" )
-
-project ("FirstProgram")
+project ("SecondProgram")
 
 # Добавьте источник в исполняемый файл этого проекта.
 add_library(LibraryInfotecs SHARED ${CMAKE_CURRENT_SOURCE_DIR}/../LibraryInfotecs/LibraryInfotecs.cpp)
 target_include_directories(LibraryInfotecs PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../LibraryInfotecs)
-add_executable (FirstProgram "FirstProgram.cpp" "FirstProgram.h")
-target_link_libraries(FirstProgram PRIVATE LibraryInfotecs)
-
+add_executable (SecondProgram "SecondProgram.cpp" "SecondProgram.h")
+target_link_libraries(SecondProgram PRIVATE LibraryInfotecs)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET FirstProgram PROPERTY CXX_STANDARD 20)
+  set_property(TARGET SecondProgram PROPERTY CXX_STANDARD 20)
 endif()
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
