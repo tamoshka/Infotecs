@@ -4,6 +4,7 @@
 #include "SecondProgram.h"
 #define PORT 8080
 using namespace std;
+string buffer;
 
 int main()
 {
@@ -55,7 +56,7 @@ int main()
                 cout << '\n';
                 cout << buffer;
                 cout << '\n';
-                cout << sum;
+                cout << received_number;
                 cout << '\n';
             }
             else
