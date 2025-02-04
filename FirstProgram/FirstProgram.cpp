@@ -4,9 +4,11 @@
 using namespace std;
 
 bool Checker(string);
-void FunctionForFirstThread(string);
-int FunctionForSecondThread();
+void* FunctionForFirstThread(void*);
+int atoi(const char* nptr);
+void* FunctionForSecondThread(void*);
 string buffer;
+int signal_sent = 0;
 pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mutex;
 
@@ -46,9 +48,10 @@ int main()
 			cin >> message;
 			pthread_t thread1, thread2;
 			pthread_mutex_init(&mutex, NULL);
-			int sum = pthread_create(&thread2, NULL, FunctionForSecondThread());
+			int sum;
+			pthread_create(&thread2, NULL, FunctionForSecondThread, sum);
 			this_thread::sleep_for(chrono::milliseconds(5));
-			pthread_create(&thread1, NULL, FunctionForFirstThread(), message);
+			pthread_create(&thread1, NULL, FunctionForFirstThread, message);
 			ssize_t bytes = send(sock, &sum, sizeof(sum), 0);
 			if (bytes <= 0) {
 				std::cerr << "Соединение потеряно, переподключение...\n";
@@ -64,8 +67,9 @@ int main()
 	return 0;
 }
 
-void FunctionForFirstThread(string message)
+void* FunctionForFirstThread(void* param)
 {
+	string message = &param;
 	pthread_mutex_lock(&mutex);
 	if (Checker(message))
 	{
@@ -76,8 +80,9 @@ void FunctionForFirstThread(string message)
 	pthread_mutex_unlock(&mutex);
 }
 
-int FunctionForSecondThread()
+void* FunctionForSecondThread(void* param2)
 {
+	int sum = &param2;
 	pthread_mutex_lock(&mutex);
 	while (!signal_sent)
 	{
@@ -87,7 +92,7 @@ int FunctionForSecondThread()
 	buffer.erase(0, buffer.size());
 	cout << message;
 	pthread_mutex_unlock(&mutex);
-	return FunctionTwo(message);
+	sum = FunctionTwo(message);
 }
 
 bool Checker(string message)
@@ -96,7 +101,7 @@ bool Checker(string message)
 	{
 		return false;
 	}
-	for (int i = 0; i < message.size(); i++)
+	for (long unsigned int i = 0; i < message.size(); i++)
 	{
 		if (message[i] != '0' && message[i] != '1' && message[i] != '2' && message[i] != '3' &&
 			message[i] != '4' && message[i] != '5' && message[i] != '6' && message[i] != '7' &&
